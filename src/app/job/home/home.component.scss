@@ -1,0 +1,109 @@
+// Variables
+$primary-color: #007bff;
+$secondary-color: #ffc107;
+$background-image: url('/assets/home.jpg');
+
+// Mixins
+@mixin transition($properties) {
+  transition: $properties 0.3s ease;
+}
+
+// Base styles
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-image: $background-image;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start; // Align items at the top
+  justify-content: center;
+
+  .content {
+    background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background
+    padding: 20px;
+    border-radius: 10px; // Add border-radius for rounded corners
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); // Add shadow for depth
+    display: flex; // Use flexbox to align items vertically
+    flex-direction: column; // Arrange items vertically
+
+    .bar {
+      background-color: $primary-color;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      border-radius: 5px; // Add border-radius for rounded corners
+      margin-bottom: 20px; // Add margin for separation
+    }
+
+    .navbar {
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        li {
+          margin: 0 10px; // Add margin between navbar items
+          &:not(:last-child) {
+            margin-right: 20px; // Add margin to all items except the last one
+          }
+
+          a {
+            color: $primary-color;
+            text-decoration: none;
+            padding: 10px 15px;
+            @include transition(color);
+            background-color: white; // Set background color to white
+            border-radius: 5px; // Add border-radius for rounded corners
+
+            &:hover {
+              color: white;
+              background-color: $primary-color; // Change background color on hover
+            }
+          }
+
+          .highlighted {
+            color: white;
+            background-color: $secondary-color; // Highlighted background color
+          }
+        }
+      }
+
+      .search-form {
+        display: flex;
+        margin-left: auto; // Push search form to the right
+
+        input[type="text"] {
+          padding: 8px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          margin-right: 5px;
+          width: 150px;
+        }
+
+        button {
+          padding: 8px 12px;
+          border-radius: 4px;
+          background-color: #0056b3;
+          color: white;
+          border: none;
+          cursor: pointer;
+          @include transition(background-color);
+
+          &:hover {
+            background-color: #004080;
+          }
+        }
+      }
+    }
+  }
+}

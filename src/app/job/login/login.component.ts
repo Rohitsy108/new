@@ -3,18 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HomeComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
   loginForm:any;
-  registerForm:any;
   activeForm:'login' | 'register' = 'login';
+
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -26,19 +27,26 @@ export class LoginComponent implements OnInit {
       password:['',Validators.required]
     });
 
-    this.registerForm = this.fb.group({
-      username:['', Validators.required],
-      email:['',[Validators.required, Validators.email]],
-      password:['',Validators.required]
-    })
   }
 
 
-toggleForm(form:'login' | 'register')
+toggleForm(form:'login' | 'register' )
 {
   this.activeForm= form;
 }
+onRegister(){
+  this.router.navigate(['/job/register']);
+}
+onHome(){
+  this.router.navigate(['/job/home']);
+}
+onForgotPassword() {
+  this.router.navigate(['/job/forgot-password']);
+}
 
+onRegisterr(){
+  this.router.navigate(['/job/register']);
+}
 login(){
   if(this.loginForm.vaild)
     {
@@ -48,21 +56,6 @@ login(){
     }
     else{
       this.snackBar.open('Invaild email or password!', 'Close', {duration:300});
-    }
-}
-register()
-{
-  if(this.registerForm.vaild)
-    {
-      console.log("Register info==>>", this.registerForm.value);
-      setTimeout(()=>{
-        window.location.reload();
-      },2000);
-      this.router.navigate(['/job/login']);
-
-    }
-    else{
-      this.snackBar.open('Please fill in all fieleds correctly!', 'Close', {duration:300});
     }
 }
 }
